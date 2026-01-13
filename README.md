@@ -45,7 +45,7 @@ The application supports function graphs, inverse-style graphs, and parametric e
 Example:
 
 ```
-x*x + 3
+x * x + 3
 ```
 
 ---
@@ -111,8 +111,8 @@ This allows domains to be defined using constants and expressions.
 Example:
 
 ```
-x*x { -2*pi <= x <= 2*pi }
-cos(t), sin(t) { 0 <= t <= 2*pi }
+x * x { -2 * pi <= x <= 2 * pi }
+cos(t), sin(t) { 0 <= t <= 2 * pi }
 ```
 
 ---
