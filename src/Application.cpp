@@ -26,17 +26,6 @@ namespace Theme {
 
 Application::Application() {
     m_GizmoScale = Settings::DefaultGizmoScale;
-
-    constexpr double PI = 3.1415926535;
-
-    // m_Graphs.emplace_back().Generate(Equation::Parse("(0.05*16*sin(t)*sin(t)*sin(t), 0.05*(13*cos(t)-5*cos(2*t)-2*cos(3*t)-cos(4*t))) { -pi <= t <= pi }").value());
-    // m_Graphs.emplace_back().Generate(Equation::Parse("(0.1*cos(2*t)*cos(t), 0.1*cos(2*t)*sin(t)) { 0 <= t <= 2*pi }").value());
-    // m_Graphs.emplace_back().Generate(Equation::Parse("(sin(2*t), cos(3*t)) { -5 <= t <= 5 }").value());
-    // m_Graphs.emplace_back().Generate(Equation::Parse("x*sin(1/x) { -pi <= x <= pi }").value());
-    // m_Graphs.emplace_back().Generate(Equation::Parse("x - 1/x^2 { -pi <= x <= pi }").value());
-    // m_Graphs.emplace_back().Generate(Equation::Parse("0.25*(2-x)/(1+sin(x)) { -10 <= x <= 10 }").value());
-    // m_Graphs.emplace_back().Generate(Equation::Parse("(x+2)/(x^2+3*x+2) { -10 <= x <= 10 }").value());
-    // m_Graphs.emplace_back().Generate(Equation::Parse("15*((sin(x)^3*15)-15)/((sin(x)^2*15)^-1-15) { -100 <= x <= 100 }").value());
 }
 
 bool Application::LoadResources(const char* root) {
