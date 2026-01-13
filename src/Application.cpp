@@ -41,7 +41,7 @@ Application::Application() {
 }
 
 bool Application::LoadResources(const char* root) {
-    if (!m_Font.openFromFile("C:/Windows/Fonts/consola.ttf")) {
+    if (!m_Font.openFromFile(root + std::string("Fonts/JetBrainsMono-SemiBold.ttf"))) {
         return false;
     }
 
