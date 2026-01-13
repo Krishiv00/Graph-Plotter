@@ -226,6 +226,12 @@ void Textbox::HandleKeyPress(sf::Keyboard::Scancode key) {
                     }
                 }
 
+                clip.erase(
+                    std::unique(clip.begin(), clip.end(),
+                        [](char a, char b) { return a == ' ' && b == ' '; }),
+                    clip.end()
+                );
+
                 if (m_CursorPosition != m_SelectingAnchor) {
                     clearSelection();
                 }
