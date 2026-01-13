@@ -220,6 +220,12 @@ void Textbox::HandleKeyPress(sf::Keyboard::Scancode key) {
             std::string clip = sf::Clipboard::getString();
 
             if (!clip.empty()) {
+                for (char& c : clip) {
+                    if (c == '\n' || c == '\r') {
+                        c = ' ';
+                    }
+                }
+
                 if (m_CursorPosition != m_SelectingAnchor) {
                     clearSelection();
                 }
@@ -285,7 +291,7 @@ float ComputeScaleFalloff(float rawWidth, float maxWidth) {
 
 void Textbox::Render(sf::RenderTarget& target, const sf::Font& font) {
     constexpr float CharacterSize = 60.f;
-    
+
     const sf::Vector2u targetSize = target.getSize();
     const sf::Vector2f textPosition = sf::Vector2f(targetSize) * 0.5f;
 

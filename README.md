@@ -132,12 +132,12 @@ A classic parametric heart shape.
 
 ---
 
-### 🌸 Flower / Petal Curve
+### 🕸 Rose Curve
 
-A polar-style flower rendered using parametric equations.
+A clean polar-style curve with multiple petals.
 
 ```
-(0.1 * cos(2 * t) * cos(t), 0.1 * cos(2 * t) * sin(t)) { 0 <= t <= 2*pi }
+(cos(4 * t) * cos(t), cos(4 * t) * sin(t)) { 0 <= t <= 2*pi }
 ```
 
 ---
@@ -168,6 +168,26 @@ A highly non-linear function that produces extreme oscillations.
 
 ```
 15 * ((sin(x) ^ 3 * 15) - 15) / ((sin(x) ^ 2 * 15) ^ - 1 - 15) { -100 <= x <= 100 }
+```
+
+---
+
+### ∞ Lemniscate of Bernoulli
+
+A classic figure-eight curve defined parametrically.
+
+```
+(cos(t) / (1 + sin(t) ^ 2), sin(t) * cos(t) / (1 + sin(t) ^ 2)) { -pi <= t <= pi }
+```
+
+---
+
+### 🧩 Butterfly Curve
+
+Complex but bounded parametric curve.
+
+```
+(sin(t) * (exp(cos(t)) - 2 * cos(4 * t) - sin(t / 12) ^ 5), cos(t) * (exp(cos(t)) - 2 * cos(4 * t) - sin(t / 12) ^ 5)) { 0 <= t <= 12 * pi }
 ```
 
 ---
