@@ -112,7 +112,6 @@ Example:
 
 ```
 x * x { -2 * pi <= x <= 2 * pi }
-cos(t), sin(t) { 0 <= t <= 2 * pi }
 ```
 
 ---
