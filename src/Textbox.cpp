@@ -26,6 +26,82 @@ constexpr inline bool IsClosingParanChar(char c) noexcept {
     return c == '}' || c == ')';
 }
 
+std::string AddSpacesAroundOperators(const std::string& expr) {
+    const std::string ops = "+-*/%^";
+    std::string out;
+
+    for (std::size_t i = 0; i < expr.size(); ++i) {
+        char c = expr[i];
+
+        if (ops.find(c) != std::string::npos) {
+            // Avoid double space
+            if (!out.empty() && out.back() != ' ')
+                out += ' ';
+
+            out += c;
+
+            // Add space after if next char is not already space
+            if (i + 1 < expr.size() && expr[i + 1] != ' ')
+                out += ' ';
+        } else {
+            out += c;
+        }
+    }
+
+    // Collapse multiple spaces (from operators + pasted text)
+    out.erase(
+        std::unique(out.begin(), out.end(),
+            [](char a, char b) { return a == ' ' && b == ' '; }),
+        out.end()
+    );
+
+    return out;
+}
+
+std::string Textbox::processPastedString(std::string str) const {
+    for (char& c : str) {
+        if (c == '\n' || c == '\r') {
+            c = ' ';
+        }
+    }
+
+    const std::string ops = "+-*/%^";
+    std::string result;
+    result.reserve(str.size() * 3);
+
+    for (std::size_t i = 0; i < str.size(); ++i) {
+        char c = str[i];
+
+        if (ops.find(c) != std::string::npos) {
+            if (!result.empty() && result.back() != ' ') {
+                result += ' ';
+            }
+
+            result += c;
+
+            if (i + 1 < str.size() && str[i + 1] != ' ') {
+                result += ' ';
+            }
+        } else {
+            result += c;
+        }
+    }
+
+    result.erase(
+        std::unique(result.begin(), result.end(),
+            [](char a, char b) { return a == ' ' && b == ' '; }),
+        result.end()
+    );
+
+    const auto first = result.find_first_not_of(' ');
+    if (first == std::string::npos) {
+        return "";
+    }
+
+    const auto last = result.find_last_not_of(' ');
+    return result.substr(first, last - first + 1);
+}
+
 std::size_t Textbox::findWordBoundary(std::size_t pos, bool dir) const {
     if (dir) {
         std::size_t end = pos;
@@ -217,21 +293,9 @@ void Textbox::HandleKeyPress(sf::Keyboard::Scancode key) {
 
     else if (key == sf::Keyboard::Scancode::V) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::LControl)) {
-            std::string clip = sf::Clipboard::getString();
+            std::string clip = processPastedString(sf::Clipboard::getString());
 
             if (!clip.empty()) {
-                for (char& c : clip) {
-                    if (c == '\n' || c == '\r') {
-                        c = ' ';
-                    }
-                }
-
-                clip.erase(
-                    std::unique(clip.begin(), clip.end(),
-                        [](char a, char b) { return a == ' ' && b == ' '; }),
-                    clip.end()
-                );
-
                 if (m_CursorPosition != m_SelectingAnchor) {
                     clearSelection();
                 }

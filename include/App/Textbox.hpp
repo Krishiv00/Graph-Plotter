@@ -4,6 +4,7 @@
 
 class Textbox {
 private:
+    std::string processPastedString(std::string str) const;
     std::size_t findWordBoundary(std::size_t pos, bool dir) const;
     std::pair<std::size_t, std::size_t> getSelectionRange() const;
     void clearSelection();
