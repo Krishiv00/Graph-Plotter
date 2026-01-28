@@ -2,3 +2,5 @@
 build
 *.exe
 Makefile
+include/Vendor/
+src/tinyexpr.c
